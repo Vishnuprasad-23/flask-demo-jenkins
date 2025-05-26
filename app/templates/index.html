@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask Calculator</title>
+</head>
+<body>
+    <h2>Simple Add Calculator</h2>
+    <input id="a" type="number" placeholder="Enter a number">
+    +
+    <input id="b" type="number" placeholder="Enter another number">
+    <button onclick="calculate()">Add</button>
+    <p id="result"></p>
+
+    <script>
+        async function calculate() {
+            const a = parseInt(document.getElementById('a').value);
+            const b = parseInt(document.getElementById('b').value);
+            const response = await fetch('/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ a, b })
+            });
+            const data = await response.json();
+            document.getElementById('result').innerText = "Result: " + data.result;
+        }
+    </script>
+</body>
+</html>
