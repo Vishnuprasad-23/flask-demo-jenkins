@@ -11,3 +11,9 @@ def add():
     data = request.get_json()
     result = data['a'] + data['b']
     return jsonify({'result': result})
+
+@main.route('multiply', methods=['POST'])
+def multiply():
+    data = request.get_json()
+    result = data['a'] * data['b']
+    return jsonify({'result': result})

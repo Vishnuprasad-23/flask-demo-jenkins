@@ -6,14 +6,22 @@
 </head>
 <body>
     <h2>Simple Add Calculator</h2>
+    <h5>Addition</h5>
     <input id="a" type="number" placeholder="Enter a number">
     +
     <input id="b" type="number" placeholder="Enter another number">
     <button onclick="calculate()">Add</button>
-    <p id="result"></p>
+    <p id="result_add"></p>
+    <br>
+    <h5>Multiplication</h5>
+    <input id="a" type="number" placeholder="Enter a number">
+    *
+    <input id="b" type="number" placeholder="Enter another number">
+    <button onclick="multiply()">Multiply</button>
+    <p id="result_mul"></p>
 
     <script>
-        async function calculate() {
+        async function multiply() {
             const a = parseInt(document.getElementById('a').value);
             const b = parseInt(document.getElementById('b').value);
             const response = await fetch('/add', {
@@ -22,7 +30,18 @@
                 body: JSON.stringify({ a, b })
             });
             const data = await response.json();
-            document.getElementById('result').innerText = "Result: " + data.result;
+            document.getElementById('result_add').innerText = "Result: " + data.result;
+        }
+        async function calculate() {
+            const a = parseInt(document.getElementById('a').value);
+            const b = parseInt(document.getElementById('b').value);
+            const response = await fetch('/multiply', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ a, b })
+            });
+            const data = await response.json();
+            document.getElementById('result_mul').innerText = "Result: " + data.result;
         }
     </script>
 </body>
